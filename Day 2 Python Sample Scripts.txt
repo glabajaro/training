@@ -1,0 +1,340 @@
+Python Script: Mission Briefing Report Generator
+===============================================================================
+# mission_briefing.py
+
+def generate_report(name, rank, mission_code, location):
+    report = f"""
+    =======================================
+              PHILIPPINE NAVY REPORT
+    =======================================
+    Officer Name   : {name}
+    Rank           : {rank}
+    Mission Code   : {mission_code}
+    Operation Zone : {location}
+    =======================================
+    Mission briefing completed.
+    """
+    return report
+
+# Collect input from user
+print("📝 Mission Briefing Input")
+officer_name = input("Enter officer's name: ")
+rank = input("Enter rank: ")
+mission_code = input("Enter mission code (e.g., OP123): ")
+location = input("Enter area of operation: ")
+
+# Generate mission briefing report
+briefing = generate_report(officer_name, rank, mission_code, location)
+
+# Output to terminal
+print(briefing)
+
+# Output to file
+file_name = "mission_briefing_report.txt"
+with open(file_name, "w") as file:
+    file.write(briefing)
+
+print(f"✅ Mission report saved to: {file_name}")
+
+
+===============================================================================
+Example 1: Mission Status Evaluator
+===============================================================================
+
+# mission_status.py
+
+fuel_level = float(input("Enter remaining fuel (in %): "))
+
+if fuel_level >= 75:
+    print("🟢 Mission Status: Full capacity. Proceed as planned.")
+elif 50 <= fuel_level < 75:
+    print("🟡 Mission Status: Adequate fuel. Monitor consumption.")
+elif 25 <= fuel_level < 50:
+    print("🟠 Mission Status: Low fuel. Consider rerouting.")
+else:
+    print("🔴 Mission Status: Critical fuel. Abort mission!")
+
+
+===============================================================================
+Example 2: Threat Level Assessment
+===============================================================================
+
+# threat_level.py
+
+enemy_signals = int(input("Enter number of detected enemy signals: "))
+
+if enemy_signals == 0:
+    print("🟢 Threat Level: No threat. Maintain patrol.")
+elif enemy_signals <= 3:
+    print("🟡 Threat Level: Minor threat. Stay alert.")
+elif enemy_signals <= 7:
+    print("🟠 Threat Level: Moderate threat. Ready defenses.")
+else:
+    print("🔴 Threat Level: High threat. Engage alert protocol!")
+
+===============================================================================
+Example 3: Ship Classification Based on Size
+===============================================================================
+
+# ship_classification.py
+
+tonnage = int(input("Enter ship tonnage (in tons): "))
+
+if tonnage < 100:
+    print("⛵ Classification: Patrol Boat")
+elif tonnage < 500:
+    print("🛥️ Classification: Corvette")
+elif tonnage < 3000:
+    print("🚢 Classification: Frigate")
+else:
+    print("🛳️ Classification: Destroyer or Heavy-Class Vessel")
+
+
+===============================================================================
+Script Title: fleet_status_report.py
+===============================================================================
+
+# fleet_status_report.py
+# Author: Philippine Navy IT Team
+# Description: Script to check the operational status of multiple naval vessels.
+# Usage: Designed for use and collaboration via Git repositories.
+
+# Sample list of ships and their status codes
+fleet = [
+    {"name": "BRP Jose Rizal", "status": "A"},
+    {"name": "BRP Antonio Luna", "status": "M"},
+    {"name": "BRP Conrado Yap", "status": "D"},
+    {"name": "BRP Gregorio del Pilar", "status": "A"},
+    {"name": "BRP Ramon Alcaraz", "status": "M"}
+]
+
+# Function to convert status code to human-readable label
+def interpret_status(code):
+    if code == "A":
+        return "Active"
+    elif code == "M":
+        return "Under Maintenance"
+    elif code == "D":
+        return "Deployed"
+    else:
+        return "Unknown Status"
+
+# Print header
+print("====== Philippine Navy Fleet Status Report ======")
+
+# Loop through each ship in the fleet
+for ship in fleet:
+    # Access name and status code
+    name = ship["name"]
+    code = ship["status"]
+    
+    # Interpret the code
+    readable_status = interpret_status(code)
+    
+    # Print formatted report line
+    print(f"Ship: {name} | Status: {readable_status}")
+
+# End of report
+print("====== End of Report ======")
+
+
+===============================================================================
+Script 1: Using Lists
+===============================================================================
+
+# patrol_areas_list.py
+# Author: Philippine Navy IT Team
+# Description: Demonstrates list usage to manage patrol zones.
+# Suitable for version control and Git collaboration.
+
+# Define a list of patrol areas (List)
+patrol_areas = ["Spratly Islands", "Scarborough Shoal", "Benham Rise", "Tawi-Tawi", "Sulu Sea"]
+
+# Create a string to hold report content
+report = "===== Maritime Patrol Zones =====\n"
+
+# Loop through the list to display each patrol area
+for idx, area in enumerate(patrol_areas, start=1):
+    report += f"{idx}. {area}\n"
+
+# Display output to terminal
+print(report)
+
+# Save to output text file
+with open("patrol_areas_report.txt", "w") as file:
+    file.write(report)
+
+===============================================================================
+Script 2: Using Dictionaries
+===============================================================================
+
+# vessel_registry_dict.py
+# Author: Philippine Navy IT Team
+# Description: Demonstrates dictionary usage to store and retrieve ship data.
+# Designed for Git version control collaboration.
+
+# Dictionary holding vessel name as key and type as value
+vessel_registry = {
+    "BRP Jose Rizal": "Frigate",
+    "BRP Antonio Luna": "Frigate",
+    "BRP Gregorio del Pilar": "Patrol Ship",
+    "BRP Tarlac": "Landing Dock",
+    "BRP Conrado Yap": "Corvette"
+}
+
+# Create formatted output
+report = "===== Philippine Navy Vessel Registry =====\n"
+for vessel, type in vessel_registry.items():
+    report += f"Ship: {vessel} | Type: {type}\n"
+
+# Display on terminal
+print(report)
+
+# Save to text file
+with open("vessel_registry_report.txt", "w") as file:
+    file.write(report)
+
+===============================================================================
+Updated Script Title: mission_log_csv_processor.py
+===============================================================================
+
+*** create Sample CSV Input File: mission_logs.csv ***
+
+Officer,Location,Result
+Lt. Reyes,Scarborough Shoal,Success
+Cmdr. Diaz,Benham Rise,Failure
+
+===============================================================================
+===============================================================================
+
+# mission_log_csv_processor.py
+# Author: Philippine Navy IT Training Team
+# Description: Demonstrates Python functions with CSV file input/output.
+# For Git-based collaboration and IT training.
+
+import csv
+
+# Function to read mission logs from CSV file
+def read_mission_logs_csv(filename):
+    logs = []
+    try:
+        with open(filename, mode='r', newline='') as file:
+            reader = csv.reader(file)
+            next(reader)  # Skip header
+            for row in reader:
+                logs.append(row)
+    except FileNotFoundError:
+        print(f"[!] File '{filename}' not found. Creating a new one.")
+    return logs
+
+# Function to collect new log entry via keyboard
+def collect_new_log():
+    print("📝 Enter new mission log entry:")
+    officer = input("Enter officer name: ")
+    location = input("Enter mission location: ")
+    result = input("Enter mission result (Success/Failure): ")
+    return [officer, location, result]
+
+# Function to write logs back to CSV file
+def write_logs_to_csv(filename, logs):
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Officer", "Location", "Result"])  # Write header
+        writer.writerows(logs)
+
+# Function to display logs to terminal
+def display_logs(logs):
+    print("\n📋 Consolidated Mission Log:")
+    for log in logs:
+        print(f"Officer: {log[0]} | Location: {log[1]} | Result: {log[2]}")
+
+# ======= Main Program Flow =======
+filename = "mission_logs.csv"
+
+# Step 1: Read from CSV
+logs = read_mission_logs_csv(filename)
+
+# Step 2: Get new log from user
+new_log = collect_new_log()
+logs.append(new_log)
+
+# Step 3: Display all logs
+display_logs(logs)
+
+# Step 4: Save back to CSV
+write_logs_to_csv(filename, logs)
+
+print(f"\n✅ Mission log updated and saved to '{filename}'")
+
+
+
+===============================================================================
+===============================================================================
+MACHINE PROBLEM 1
+https://drive.google.com/file/d/1mE7uVM-BLbL4W3SpSXijlVsfxMhuXa3x/view?usp=sharing
+===============================================================================
+===============================================================================
+MACHINE PROBLEM 2
+https://drive.google.com/file/d/1wxGhjQgmYYYNDusehQgY2a13qC7PKGXS/view?usp=sharing
+===============================================================================
+===============================================================================
+MACHINE PROBLEM 3
+https://drive.google.com/file/d/1RYxOqCljl2Cw7kVYeuCUAAJfYFFVmvlo/view?usp=sharing
+
+Pertinent Files:
+https://drive.google.com/drive/folders/1q8_FHl79jFTcuhYQAWt3PjDiM_JjueQp?usp=sharing
+===============================================================================
+===============================================================================
+
+
+from prettytable import PrettyTable
+import csv
+from io import StringIO
+
+# Simulate the CSV content
+csv_data = """Name,Rank
+Lt. Santos,Operations Officer
+Cmdr. Reyes,Executive Off
+Lt. Diaz,Communications Officer
+Ens. Cruz,Deck Officer
+Lt. Gomez,Navigation Officer
+"""
+
+# Use StringIO to mimic file reading
+csv_file = StringIO(csv_data)
+
+# Create a PrettyTable instance
+table = PrettyTable()
+
+# Read CSV content
+reader = csv.reader(csv_file)
+headers = next(reader)  # Get headers from first row
+table.field_names = headers
+
+# Add the rest of the rows to the table
+for row in reader:
+    table.add_row(row)
+
+# Print the formatted table
+print(table)
+
+
+===============================================================================
+OUTPUT:
+
++-------------+----------------------+
+|     Name    |         Rank         |
++-------------+----------------------+
+| Lt. Santos  | Operations Officer   |
+| Cmdr. Reyes | Executive Officer    |
+|  Lt. Diaz   | Communications Off   |
+|  Ens. Cruz  |     Deck Officer     |
+| Lt. Gomez   | Navigation Officer   |
++-------------+----------------------+
+
+===============================================================================
+===============================================================================
+FINAL GROUP PROJECT LINK
+https://docs.google.com/document/d/1vjZomEq8QKTCKVR3AH-SfbAjh8udmlF8L2r-JvhszdI/edit?usp=sharing
+===============================================================================
+===============================================================================
